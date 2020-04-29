@@ -1,5 +1,3 @@
-package source;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -8,11 +6,7 @@ import io.jbotsim.core.Point;
 
 public class WaypointNode extends Node {
 	Queue<Point> destinations = new LinkedList<>();
-<<<<<<< HEAD
-	double speed = 4;
-=======
 	double speed = 1;
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 
 	public void addDestination(double x, double y) {
 		destinations.add(new Point(x, y));

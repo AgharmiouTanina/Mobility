@@ -1,18 +1,15 @@
-package source;
-
 import io.jbotsim.core.LinkResolver;
 import io.jbotsim.core.Node;
 import io.jbotsim.core.Topology;
 import io.jbotsim.ui.JViewer;
 
 public class Main {
+	
+	public static int robotId = 0;
+	
 	public static void main(String[] args) {
 		// Create topology with clock not started
 		Topology tp = new Topology();
-<<<<<<< HEAD
-		long startTime = System.currentTimeMillis();
-=======
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 
 		// Forbid communication between robots and sensors
 		tp.setLinkResolver(new LinkResolver() {
@@ -27,7 +24,7 @@ public class Main {
 
 		// Add sensors
 		tp.setDefaultNodeModel(Sensor.class);
-		String filename = "topology/sensors2.tp"; // to be adapted
+		String filename = "topology/sensors.tp"; // to be adapted
 		String data = tp.getFileManager().read(filename);
 		tp.getSerializer().importFromString(tp, data);
 
@@ -36,17 +33,10 @@ public class Main {
 
 		// Add two robots
 		tp.addNode(90, 40, new Robot());
+		robotId++;
 		tp.addNode(60, 80, new Robot());
 
 		new JViewer(tp);
 		tp.start();
-<<<<<<< HEAD
-
-		long endTime = System.currentTimeMillis();
-
-		System.out.println("That took " + (endTime - startTime) + " milliseconds");
-
-=======
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 	}
 }

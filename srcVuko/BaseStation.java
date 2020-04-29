@@ -1,11 +1,7 @@
-package source;
-
 import io.jbotsim.core.Message;
 import io.jbotsim.core.Node;
 import io.jbotsim.ui.icons.Icons;
 
-<<<<<<< HEAD
-=======
 /*
  * au début on construit l'arbre couvrant
  *
@@ -15,29 +11,11 @@ import io.jbotsim.ui.icons.Icons;
  *
  * qd un robot arrive à un capteur onArrival(), on recharge sa batterie
  */
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 public class BaseStation extends Node {
 	boolean envoie;
 
 	@Override
 	public void onMessage(Message message) {
-<<<<<<< HEAD
-		int i = 0;
-		if (message.getFlag().equals("SENSING")) {
-			envoie = true;
-			while (i < getNeighbors().size()) {
-				if (getNeighbors().get(i) instanceof Robot) {
-					if (((Robot) (getNeighbors().get(i))).park && envoie) {
-						envoie = false;
-						send(getNeighbors().get(i), message);
-						// break;
-					}
-					break;
-				}
-				i++;
-			}
-		}
-=======
 
 		if (message.getFlag().equals("SENSING")) {
 			envoie = true;
@@ -52,7 +30,6 @@ public class BaseStation extends Node {
 			}
 		}
 
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 	}
 
 	@Override

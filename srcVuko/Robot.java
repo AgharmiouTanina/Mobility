@@ -1,13 +1,5 @@
-package source;
-
-<<<<<<< HEAD
-import static java.util.Map.Entry.comparingByValue;
-import static java.util.stream.Collectors.toMap;
-
-import java.util.LinkedHashMap;
-=======
+import java.util.ArrayList;
 import java.util.Collections;
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 import java.util.Map;
 
 import io.jbotsim.core.Message;
@@ -15,17 +7,22 @@ import io.jbotsim.core.Node;
 import io.jbotsim.core.Point;
 import io.jbotsim.ui.icons.Icons;
 
+/* En fonction de l'id du robot, on va vérifier certains noeuds et pas d'autres
+ * A rajouter: chercher dans listNode, le noeud ayant le moins de batterie et envoyer le robot là-bas(ou même le noeud à plus grande distance ayant le moins de batterie)
+ */
+
 public class Robot extends WaypointNode {
+	int idRobot;
+	int tmp = 0;
+	ArrayList<Node> toRecharge;
 	Point station;
 	boolean park;
-<<<<<<< HEAD
-//	List<Node> batt = new ArrayList<Node>();
-=======
 	Node max;
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 
 	@Override
 	public void onStart() {
+		idRobot = Main.robotId;
+		toRecharge = new ArrayList<Node>();
 		park = true;
 		station = getLocation();
 		setSensingRange(30);
@@ -45,34 +42,24 @@ public class Robot extends WaypointNode {
 	public void onMessage(Message message) {
 		if (message.getContent() instanceof Red) {
 			park = false;
-<<<<<<< HEAD
-
-			Map<Node, Integer> sorted = (((Red) message.getContent()).al).entrySet().stream().sorted(comparingByValue())
-					.collect(toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2, LinkedHashMap::new));
-
-			for (Map.Entry<Node, Integer> entry : sorted.entrySet()) {
-				// ((Red) message.getContent()).listNode.add(entry.getKey());
-				// ((Red) message.getContent()).listBattery.add(entry.getValue());
-
-				addDestination(entry.getKey().getX(), entry.getKey().getY());
-
-			}
-			// System.out.println(sorted);
-			addDestination(station.getX(), station.getY());
-
-=======
 			for (Map.Entry<Node, Integer> entry : ((Red) message.getContent()).al.entrySet()) {
 
 				((Red) message.getContent()).listNode.add(entry.getKey());
 				Collections.sort(((Red) message.getContent()).listNode);
 				max = Collections.max(((Red) message.getContent()).listNode);
-				addDestination(max.getX(), max.getY());
+				if(max.getID() > 15 && this.getID() == 34 && max.distance(this) > 150) {
+					System.out.println("Robot 1 id:" + this.getID());
+					addDestination(max.getX(), max.getY());
+				}
+				if(max.getID() < 16 && this.getID() == 33 && max.distance(this) > 150) {
+					System.out.println("Robot 0 id:" + this.getID());
+					addDestination(max.getX(), max.getY());
+				}
 
 			}
-			System.out.println("ALERT  " + ((Red) message.getContent()).listNode);
+			//System.out.println("ALERT  " + ((Red) message.getContent()).listNode);
 
 			addDestination(station.getX(), station.getY());
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 		}
 
 	}
