@@ -1,3 +1,6 @@
+
+import java.util.List;
+
 import io.jbotsim.core.LinkResolver;
 import io.jbotsim.core.Node;
 import io.jbotsim.core.Topology;
@@ -6,6 +9,7 @@ import io.jbotsim.ui.JViewer;
 public class Main {
 	
 	public static int robotId = 0;
+	public static int maxNodes = 0;
 	
 	public static void main(String[] args) {
 		// Create topology with clock not started
@@ -33,8 +37,12 @@ public class Main {
 
 		// Add two robots
 		tp.addNode(90, 40, new Robot());
-		robotId++;
+		List<Node> noeuds = tp.getNodes();
+		robotId = noeuds.size();
 		tp.addNode(60, 80, new Robot());
+		robotId++;
+		noeuds = tp.getNodes();
+		maxNodes = noeuds.size();
 
 		new JViewer(tp);
 		tp.start();

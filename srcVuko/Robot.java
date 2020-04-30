@@ -47,11 +47,11 @@ public class Robot extends WaypointNode {
 				Collections.sort(((Critical) message.getContent()).listNode);
 				max = Collections.max(((Critical) message.getContent()).listNode);
 				
-				if(max.getID() > 15 && this.getID() == 34) {
+				if(max.getID() > Main.maxNodes/2 && idRobot == 0) {
 					System.out.println("Robot 1 id:" + this.getID());
 					addDestination(max.getX(), max.getY());
 				}
-				if(max.getID() < 16 && this.getID() == 33) {
+				if(max.getID() < Main.maxNodes && idRobot == 1) {
 					System.out.println("Robot 0 id:" + this.getID());
 					addDestination(max.getX(), max.getY());
 				}
