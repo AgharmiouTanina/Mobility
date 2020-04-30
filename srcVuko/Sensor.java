@@ -37,12 +37,32 @@ public class Sensor extends Node {
 				// propagate further
 				sendAll(message);
 			}
-		}else if (message.getFlag().equals("SENSING")) {
+		}else if (message.getFlag().equals("CRITICAL")) {
+
+			if (message.getContent() instanceof Critical) {
+				if (battery <= 10) {
+					// ((Red) message.getContent()).listNode.add(this);
+					((Critical) message.getContent()).al.put(this, getBattery());
+				}
+			}
+			send(parent, message);
+		}
+		else if (message.getFlag().equals("SENSING")) {
 
 			if (message.getContent() instanceof Red) {
-				if (battery <= 254) {
+				if (battery <= 100) {
 					// ((Red) message.getContent()).listNode.add(this);
 					((Red) message.getContent()).al.put(this, getBattery());
+				}
+			}
+			send(parent, message);
+		}
+		else if (message.getFlag().equals("SENSING2")) {
+
+			if (message.getContent() instanceof LessBattery) {
+				if (battery <= 254) {
+					// ((Red) message.getContent()).listNode.add(this);
+					((LessBattery) message.getContent()).al.put(this, getBattery());
 				}
 			}
 			send(parent, message);
@@ -66,11 +86,21 @@ public class Sensor extends Node {
 			if (Math.random() < 0.02) { // from time to time...
 				sensedValue = Math.random(); // sense a value
 				Red red = new Red();
-
-				if (battery <= 100)
+				LessBattery lessBattery = new LessBattery();
+				Critical critical = new Critical();
+				if(battery <= 10) {
+					critical.al.put(this, getBattery());
+					send(parent, new Message(critical, "CRITICAL"));
+				}
+				if (battery <= 100) {
 					// red.listNode.add(this);
 					red.al.put(this, getBattery());
-				send(parent, new Message(red, "SENSING")); // send it to parent
+					send(parent, new Message(red, "SENSING")); // send it to parent
+				}else if(battery <= 254) {
+					lessBattery.al.put(this, getBattery());
+					send(parent, new Message(lessBattery, "SENSING2")); // send it to parent
+				}
+				//send(parent, new Message(red, "SENSING")); // send it to parent
 
 			}
 		}

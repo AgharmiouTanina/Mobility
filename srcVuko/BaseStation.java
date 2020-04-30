@@ -16,8 +16,32 @@ public class BaseStation extends Node {
 
 	@Override
 	public void onMessage(Message message) {
-
-		if (message.getFlag().equals("SENSING")) {
+		
+		if (message.getFlag().equals("CRITICAL")) {
+			envoie = true;
+			for (int i = 0; i < getNeighbors().size(); i++) {
+				if (getNeighbors().get(i) instanceof Robot) {
+					if (((Robot) (getNeighbors().get(i))).park == true && envoie) {
+						envoie = false;
+						send(getNeighbors().get(i), message);
+						break;
+					}
+				}
+			}
+		}
+		else if (message.getFlag().equals("SENSING")) {
+			envoie = true;
+			for (int i = 0; i < getNeighbors().size(); i++) {
+				if (getNeighbors().get(i) instanceof Robot) {
+					if (((Robot) (getNeighbors().get(i))).park == true && envoie) {
+						envoie = false;
+						send(getNeighbors().get(i), message);
+						break;
+					}
+				}
+			}
+		}
+		else if (message.getFlag().equals("SENSING2")) {
 			envoie = true;
 			for (int i = 0; i < getNeighbors().size(); i++) {
 				if (getNeighbors().get(i) instanceof Robot) {
