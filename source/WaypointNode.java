@@ -8,6 +8,10 @@ import io.jbotsim.core.Point;
 
 public class WaypointNode extends Node {
 	Queue<Point> destinations = new LinkedList<>();
+<<<<<<< HEAD
+=======
+
+>>>>>>> b16064ca8941f7c6724997e182ce8a9ce31c6dff
 	double speed = 1;
 
 	public void addDestination(double x, double y) {
