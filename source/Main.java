@@ -9,10 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		// Create topology with clock not started
 		Topology tp = new Topology();
-<<<<<<< HEAD
 		long startTime = System.currentTimeMillis();
-=======
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 
 		// Forbid communication between robots and sensors
 		tp.setLinkResolver(new LinkResolver() {
@@ -40,13 +37,10 @@ public class Main {
 
 		new JViewer(tp);
 		tp.start();
-<<<<<<< HEAD
 
 		long endTime = System.currentTimeMillis();
 
 		System.out.println("That took " + (endTime - startTime) + " milliseconds");
 
-=======
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 	}
 }

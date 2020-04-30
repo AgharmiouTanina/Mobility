@@ -1,10 +1,5 @@
 package source;
 
-<<<<<<< HEAD
-=======
-import java.util.List;
-
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 import io.jbotsim.core.Color;
 import io.jbotsim.core.Message;
 import io.jbotsim.core.Node;
@@ -12,26 +7,9 @@ import io.jbotsim.core.Node;
 public class Sensor extends Node {
 	Node parent = null;
 	int battery = 255;
-<<<<<<< HEAD
 
 	public int getBattery() {
 		return this.battery;
-=======
-	Node base;
-	String str = "";
-	List<Node> copy;
-
-	public Node getBase() {
-		return base;
-	}
-
-	public void setBase(Node station) {
-		this.base = this.base == null ? station : this.base;
-	}
-
-	public int getBattery() {
-		return battery;
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 	}
 
 	@Override
@@ -56,10 +34,7 @@ public class Sensor extends Node {
 					((Red) message.getContent()).al.put(this, getBattery());
 				}
 			}
-<<<<<<< HEAD
 
-=======
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 			send(parent, message);
 		}
 	}
@@ -77,7 +52,6 @@ public class Sensor extends Node {
 	public void onClock() {
 
 		if (parent != null) { // if already in the tree
-<<<<<<< HEAD
 			if (Math.random() < 0.02) { // from time to time...
 				Red red = new Red();
 				if (battery <= 100) {
@@ -85,18 +59,6 @@ public class Sensor extends Node {
 					// red.listNode.add(this);
 				}
 				send(parent, new Message(red, "SENSING")); // send it to parent
-=======
-			double sensedValue = 0;
-			if (Math.random() < 0.02) { // from time to time...
-				sensedValue = Math.random(); // sense a value
-				Red red = new Red();
-
-				if (battery <= 100)
-					// red.listNode.add(this);
-					red.al.put(this, getBattery());
-				send(parent, new Message(red, "SENSING")); // send it to parent
-
->>>>>>> 33f76a1069338e8c0112a9dfdf3dcab670ff3b6b
 			}
 		}
 	}
